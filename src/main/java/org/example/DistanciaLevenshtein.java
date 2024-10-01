@@ -23,7 +23,7 @@ public class DistanciaLevenshtein {
         }
     }
 
-    // Método para calcular la distancia de Levenshtein
+    // Metodo para calcular la distancia de Levenshtein
     public static int calcularDistanciaLevenshtein(String palabra1, String palabra2) {
         int len1 = palabra1.length();
         int len2 = palabra2.length();
@@ -50,10 +50,10 @@ public class DistanciaLevenshtein {
         return distancia[len1][len2];
     }
 
-    // Metodo para extraer palabras de un texto usando regex
+    // Expresion regular para identificar palabras (alfabeticas, incluyendo acentos y ñ)
     public static List<String> extraerPalabras(String texto) {
         List<String> palabras = new ArrayList<>();
-        String regex = "\\b[\\p{L}]+\\b";  // Expresión regular para palabras (incluye letras acentuadas y ñ)
+        String regex = "\\b[\\p{L}]+\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(texto);
 
@@ -66,11 +66,11 @@ public class DistanciaLevenshtein {
 
     // Metodo principal
     public static void main(String[] args) {
-        // Cargar el archivo de texto desde resources
+        // Cargar el archivo del txt
         InputStream inputStream = DistanciaLevenshtein.class.getClassLoader().getResourceAsStream("discurso.txt");
 
         if (inputStream == null) {
-            System.out.println("Error: No se pudo encontrar el archivo discurso.txt en resources.");
+            System.out.println("Error: No se pudo encontrar el archivo discurso.txt.");
             return;
         }
 
@@ -108,7 +108,7 @@ public class DistanciaLevenshtein {
         palabrasConDistancia.sort(Comparator.comparingInt(p -> p.distancia));
 
         // Imprimir resultados ordenados
-        System.out.println("Comparando palabras extraídas con la palabra de referencia: " + palabraReferencia);
+        System.out.println("Comparando palabras extraidas con la palabra de referencia: " + palabraReferencia);
         for (PalabraConDistancia pd : palabrasConDistancia) {
             System.out.println("Palabra: " + pd.palabra + " | Distancia: " + pd.distancia);
         }

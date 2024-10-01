@@ -20,7 +20,7 @@ public class ContarPalabrasPorLongitud {
         Map<Integer, Integer> conteoPorLongitud = new HashMap<>();
         int totalPalabras = 0;  // Contador total de palabras
 
-        // Obtener el archivo de recursos (dentro de la carpeta resources)
+        // Obtener el txt
         InputStream inputStream = ContarPalabrasPorLongitud.class.getClassLoader().getResourceAsStream("discurso.txt");
 
         if (inputStream == null) {
@@ -38,12 +38,12 @@ public class ContarPalabrasPorLongitud {
             }
             reader.close();
 
-            // Expresión regular para identificar palabras (alfabéticas, incluyendo acentos y ñ)
+            // Expresion regular para identificar palabras (alfabeticas, incluyendo acentos y ñ)
             String regex = "\\b[\\p{L}]+\\b";  // Palabras formadas por caracteres unicode (\p{L} incluye letras acentuadas y ñ)
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(contenido.toString());
 
-            // Agrupar las palabras por su longitud y contar cuántas hay de cada longitud
+            // Agrupar las palabras por su longitud y contar cuantas hay de cada longitud
             while (matcher.find()) {
                 String palabra = matcher.group();
                 int longitud = palabra.length();
@@ -51,7 +51,7 @@ public class ContarPalabrasPorLongitud {
                 // Incrementar el total de palabras
                 totalPalabras++;
 
-                // Si la longitud no está en el mapa, agregamos una lista vacía
+                // Si la longitud no esta en el mapa, agregamos una lista vacia
                 palabrasPorLongitud.putIfAbsent(longitud, new ArrayList<>());
 
                 // Agregar la palabra a la lista correspondiente
@@ -87,7 +87,7 @@ public class ContarPalabrasPorLongitud {
                 // Escribir las palabras separadas por comas
                 writer.write(String.join(", ", entry.getValue()));
 
-                writer.write("\n\n");  // Salto de línea entre grupos
+                writer.write("\n\n");  // Salto de linea entre grupos
             }
             System.out.println("Palabras agrupadas por longitud escritas en palabras_por_longitud.txt");
         } catch (IOException e) {
